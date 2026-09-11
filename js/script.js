@@ -1,3 +1,8 @@
+// ---- always land at the top on a fresh visit (not wherever the browser last scrolled to) ----
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (!location.hash) window.scrollTo(0, 0);
+window.addEventListener('pageshow', () => { if (!location.hash) window.scrollTo(0, 0); });
+
 // replace with your GitHub username to pull real activity
 const GITHUB_USERNAME = "sadqma";
 
@@ -96,6 +101,22 @@ applyThemeIcons();
     }, 260 + 220);
   }
 
+  // devices with a real mouse get hover; touch devices (no hover) get tap-to-toggle instead —
+  // mouseenter/mouseleave don't reliably pair up on tap, which left the photo stuck on touch
+  const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  let showingBack = false;
+  function bindInteraction(showBack, showFront) {
+    if (supportsHover) {
+      wrap.addEventListener('mouseenter', showBack);
+      wrap.addEventListener('mouseleave', showFront);
+    } else {
+      wrap.addEventListener('click', () => {
+        showingBack = !showingBack;
+        (showingBack ? showBack : showFront)();
+      });
+    }
+  }
+
   let frontColors, backColors;
   Promise.all([ready(front), ready(back)]).then(() => {
     try {
@@ -103,12 +124,16 @@ applyThemeIcons();
       backColors = sampleColors(back);
     } catch (e) {
       // canvas pixel read blocked (e.g. file:// origin) — fall back to a plain crossfade
-      wrap.addEventListener('mouseenter', () => { back.style.opacity = '1'; front.style.opacity = '0'; });
-      wrap.addEventListener('mouseleave', () => { front.style.opacity = '1'; back.style.opacity = '0'; });
+      bindInteraction(
+        () => { back.style.opacity = '1'; front.style.opacity = '0'; },
+        () => { front.style.opacity = '1'; back.style.opacity = '0'; }
+      );
       return;
     }
-    wrap.addEventListener('mouseenter', () => dissolve(backColors, back, front));
-    wrap.addEventListener('mouseleave', () => dissolve(frontColors, front, back));
+    bindInteraction(
+      () => dissolve(backColors, back, front),
+      () => dissolve(frontColors, front, back)
+    );
   });
 })();
 
@@ -232,6 +257,15 @@ function renderGrid(days) {
   ghGrid.innerHTML = '';
   ghMonths.innerHTML = '';
 
+  // shrink cells on narrow screens so the whole year fits without horizontal scrolling
+  const isMobile = window.innerWidth < 640;
+  const cellClass = isMobile ? 'w-1 h-1' : 'w-2.5 h-2.5';
+  const gapClass = isMobile ? 'gap-px' : 'gap-0.75';
+  const labelWidth = isMobile ? 'w-1' : 'w-2.5';
+  ghGrid.parentElement.classList.remove('min-w-150');
+  ghMonths.className = `flex ${gapClass} pl-0 text-[10px] text-gray-400 dark:text-gray-500`;
+  ghGrid.className = `flex ${gapClass}`;
+
   // build week columns
   const weeks = [];
   let week = [];
@@ -244,19 +278,19 @@ function renderGrid(days) {
   let lastMonth = -1;
   weeks.forEach(w => {
     const label = document.createElement('div');
-    label.className = 'w-2.5 shrink-0';
+    label.className = `${labelWidth} shrink-0`;
     const firstDay = w.find(d => d.date);
     if (firstDay) {
       const m = new Date(firstDay.date).getMonth();
-      if (m !== lastMonth) { label.textContent = monthNames[m]; lastMonth = m; }
+      if (m !== lastMonth) { label.textContent = isMobile ? '' : monthNames[m]; lastMonth = m; }
     }
     ghMonths.appendChild(label);
 
     const col = document.createElement('div');
-    col.className = 'flex flex-col gap-0.75';
+    col.className = `flex flex-col ${gapClass}`;
     w.forEach(d => {
       const cell = document.createElement('div');
-      cell.className = 'w-2.5 h-2.5 rounded-sm';
+      cell.className = `${cellClass} rounded-sm`;
       cell.title = d.date ? `${d.count} contributions on ${d.date}` : '';
       cell.style.background = cellColor(d.level);
       col.appendChild(cell);

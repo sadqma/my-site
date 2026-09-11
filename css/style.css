@@ -60,12 +60,6 @@ html.dark .marquee { border-color: rgb(55 65 81 / 1); }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-@media (max-width: 640px) {
-  .marquee { -webkit-mask-image: none; mask-image: none; padding: 16px 0; }
-  .marquee-track { flex-wrap: wrap; width: 100%; animation: none; transform: none !important; }
-  .marquee-track > *:nth-child(n + 13) { display: none; }
-}
-
 /* OUTSIDE THE IDE — fanned card stack, drag to swipe */
 .gallery { position: relative; user-select: none; }
 .gallery-card {
