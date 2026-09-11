@@ -24,6 +24,7 @@ themeBtn.addEventListener('click', () => {
   const toggle = () => {
     document.documentElement.classList.toggle('dark');
     applyThemeIcons();
+    refreshGridColors();
   };
   if (prefersReducedMotion) { toggle(); return; }
 
@@ -292,10 +293,19 @@ function renderGrid(days) {
       const cell = document.createElement('div');
       cell.className = `${cellClass} rounded-sm`;
       cell.title = d.date ? `${d.count} contributions on ${d.date}` : '';
+      cell.dataset.level = d.level;
       cell.style.background = cellColor(d.level);
       col.appendChild(cell);
     });
     ghGrid.appendChild(col);
+  });
+}
+
+// re-tint every cell when the theme changes — renderGrid only runs once, so without
+// this the empty (level-0) cells kept their original-theme color forever
+function refreshGridColors() {
+  ghGrid.querySelectorAll('[data-level]').forEach(cell => {
+    cell.style.background = cellColor(+cell.dataset.level);
   });
 }
 
