@@ -154,59 +154,46 @@ function layoutGallery() {
 }
 layoutGallery();
 
-const DRAG_THRESHOLD = 60; // px dragged before the card is sent to the back
-const TAP_THRESHOLD = 8;   // px of movement still counted as a plain tap
+const DRAG_THRESHOLD = 60; // raw px dragged before the card cycles to the back
+const TAP_THRESHOLD = 8;   // raw px of movement still counted as a plain tap
+const ELASTIC = 0.5;       // rubber-band resistance while actively dragging
 let drag = null;
 
 gallery.addEventListener('pointerdown', e => {
   const card = order[0];
   if (!card.contains(e.target)) return;
-  card.setPointerCapture(e.pointerId);
+  try { card.setPointerCapture(e.pointerId); } catch (err) { /* no active pointer to capture — drag still works via bubbling */ }
   card.classList.add('dragging');
   drag = { card, pointerId: e.pointerId, startX: e.clientX, startY: e.clientY, dx: 0, dy: 0 };
 });
 
-gallery.addEventListener('pointermove', e => {
+// listen on window (not just the card/gallery) so the drag still tracks correctly
+// even if the pointer ends up outside the card's bounds mid-gesture
+window.addEventListener('pointermove', e => {
   if (!drag || e.pointerId !== drag.pointerId) return;
   drag.dx = e.clientX - drag.startX;
   drag.dy = e.clientY - drag.startY;
-  drag.card.style.transform = `translate(${drag.dx}px, ${drag.dy}px) rotate(${drag.dx / 14}deg)`;
+  const x = drag.dx * ELASTIC, y = drag.dy * ELASTIC;
+  drag.card.style.transform = `translate(${x}px, ${y}px) rotate(${x / 14}deg)`;
 });
 
 function endDrag(e) {
   if (!drag || (e && e.pointerId !== drag.pointerId)) return;
   const { card, dx, dy } = drag;
-  card.classList.remove('dragging');
-  const dist = Math.hypot(dx, dy);
   drag = null;
+  card.classList.remove('dragging'); // re-enables the card's own transform transition
+  card.style.transform = ''; // let that transition carry it from the drag offset to its resting spot
 
-  if (dist <= TAP_THRESHOLD) {
-    // plain tap — cycle the stack, same as before
-    card.style.transform = '';
+  const dist = Math.hypot(dx, dy);
+  if (dist <= TAP_THRESHOLD || dist >= DRAG_THRESHOLD) {
+    // tap, or dragged far enough — cycle it to the back of the stack
     order.push(order.shift());
     layoutGallery();
-  } else if (dist < DRAG_THRESHOLD) {
-    // dragged, but not far enough — spring back
-    card.style.transition = 'transform .35s ease';
-    card.style.transform = '';
-    setTimeout(() => { card.style.transition = ''; }, 350);
-  } else {
-    // flung far enough — send flying off and cycle to the back
-    const angle = Math.atan2(dy, dx);
-    card.style.transition = 'transform .35s ease, opacity .35s ease';
-    card.style.transform = `translate(${Math.cos(angle) * 500}px, ${Math.sin(angle) * 500}px) rotate(${dx / 6}deg)`;
-    card.style.opacity = '0';
-    setTimeout(() => {
-      card.style.transition = '';
-      card.style.transform = '';
-      card.style.opacity = '';
-      order.push(order.shift());
-      layoutGallery();
-    }, 350);
   }
+  // otherwise: dragged a bit but not far enough — it just springs back to the front
 }
-gallery.addEventListener('pointerup', endDrag);
-gallery.addEventListener('pointercancel', endDrag);
+window.addEventListener('pointerup', endDrag);
+window.addEventListener('pointercancel', endDrag);
 
 // ---- real visit counter (abacus.jasoncameron.dev, free hit-counter API) ----
 const visitEl = document.getElementById('visitCount');
