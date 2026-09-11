@@ -1,0 +1,84 @@
+html { scroll-behavior: smooth; }
+
+/* AVATAR pixel dissolve */
+.avatar { position: relative; overflow: hidden; }
+.avatar img { position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity .2s ease; }
+.avatar .front { opacity: 1; }
+.avatar .back { opacity: 0; }
+.pixel-layer { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.pixel-tile { position: absolute; opacity: 0; transition: opacity .22s ease; }
+
+/* THEME switch — native View Transitions, diagonal wipe */
+@supports (view-transition-name: root) {
+  ::view-transition-old(root) { animation: none; }
+  ::view-transition-new(root) { animation: .8s cubic-bezier(.65,0,.35,1) theme-reveal; }
+}
+@keyframes theme-reveal {
+  0% { clip-path: polygon(-45% -20%, -15% -20%, -60% 120%, -90% 120%); }
+  100% { clip-path: polygon(-45% -20%, 145% -20%, 110% 120%, -90% 120%); }
+}
+.theme-glint {
+  position: fixed; top: -20%; left: -10%; width: 8px; height: 140%;
+  transform: rotate(12deg); z-index: 9999; pointer-events: none; opacity: 0;
+  background: linear-gradient(transparent, rgba(255,255,255,.95) 45% 55%, transparent);
+  box-shadow: 0 0 20px 4px rgba(255,255,255,.65), 0 0 44px 12px rgba(255,255,255,.3);
+}
+.theme-glint.slicing { animation: .8s cubic-bezier(.65,0,.35,1) forwards theme-glint-move; }
+@keyframes theme-glint-move {
+  0% { opacity: 0; left: -10%; }
+  8% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; left: 110%; }
+}
+.theme-pulse { position: absolute; inset: 0; border-radius: 9999px; pointer-events: none; animation: pulse-burst .6s ease-out; }
+@keyframes pulse-burst { 0% { opacity: .6; transform: scale(0); } 100% { opacity: 0; transform: scale(2.2); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation: none !important; }
+  .theme-glint, .theme-pulse { display: none !important; }
+}
+
+/* PROJECT CARD spotlight glow */
+.card-spotlight { position: relative; }
+.card-spotlight::before {
+  content: "";
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,.06), transparent 70%);
+  opacity: 0; transition: opacity .3s; pointer-events: none;
+}
+.card-spotlight:hover::before { opacity: 1; }
+
+/* TECH MARQUEE */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid rgb(229 231 235 / 1); border-bottom: 1px solid rgb(229 231 235 / 1);
+  padding: 18px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+html.dark .marquee { border-color: rgb(55 65 81 / 1); }
+.marquee-track { display: flex; gap: 12px; width: max-content; animation: marquee-scroll 32s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (max-width: 640px) {
+  .marquee { -webkit-mask-image: none; mask-image: none; padding: 16px 0; }
+  .marquee-track { flex-wrap: wrap; width: 100%; animation: none; transform: none !important; }
+  .marquee-track > *:nth-child(n + 13) { display: none; }
+}
+
+/* OUTSIDE THE IDE — fanned card stack, drag to swipe */
+.gallery { position: relative; user-select: none; }
+.gallery-card {
+  position: absolute; inset: 0; border-radius: 16px;
+  border: 1px solid rgb(203 213 225 / .5);
+  display: flex; align-items: flex-end; padding: 16px;
+  font-size: 13px; color: #fff; font-weight: 600;
+  opacity: 1; box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  transition: transform .45s ease, box-shadow .45s ease;
+  cursor: grab; transform-origin: 90% 90%; touch-action: none;
+}
+.gallery-card.pos-0.dragging { transition: none; cursor: grabbing; box-shadow: 0 16px 32px rgba(0,0,0,.35); }
+.gallery-card.pos-0 { transform: scale(1) rotate(0deg); z-index: 4; }
+.gallery-card.pos-1 { transform: scale(.94) rotate(-6deg); z-index: 3; }
+.gallery-card.pos-2 { transform: scale(.88) rotate(-11deg); z-index: 2; }
+.gallery-card.pos-3 { transform: scale(.82) rotate(-15deg); z-index: 1; }

@@ -1,191 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nikita Bulava — Data Scientist</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="wrap">
 
-  <header>
-    <div class="logo">sad</div>
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
-    </button>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: { ink: '#121212' },
+        spacing: { '0.75': '0.1875rem', '1.75': '0.4375rem', '150': '37.5rem' },
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased bg-white text-gray-900 dark:bg-ink dark:text-white min-h-screen">
+
+<div class="min-h-screen flex flex-col">
+
+  <header class="sticky top-0 z-40 bg-white/70 dark:bg-ink/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
+    <nav class="max-w-3xl w-full mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
+      <a class="text-sm font-bold text-black hover:text-gray-900 dark:text-white dark:hover:text-gray-200 transition-colors" href="#">NB</a>
+      <div class="flex items-center gap-3 sm:gap-5">
+        <div class="flex items-center gap-3 sm:gap-4">
+          <a class="text-xs sm:text-sm font-normal whitespace-nowrap transition-colors text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" href="#projects">Projects</a>
+          <a class="text-xs sm:text-sm font-normal whitespace-nowrap transition-colors text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" href="#education">Education</a>
+          <a class="text-xs sm:text-sm font-normal whitespace-nowrap transition-colors text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" href="#contact">Contact</a>
+        </div>
+        <div class="w-px h-5 bg-gray-200 dark:bg-gray-700"></div>
+        <button type="button" id="themeBtn" title="Toggle theme" class="relative w-8 h-8 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          <svg id="sunIcon" class="absolute w-4 h-4 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2" fill="currentColor" stroke="none"></circle><path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.55 1.55M17.55 17.55l1.55 1.55M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.55-1.55M17.55 6.45l1.55-1.55"></path></svg>
+          <svg id="moonIcon" class="absolute w-4 h-4 transition-all duration-500" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6c-1 .4-2.1.6-3.2.6-5 0-9-4-9-9 0-1.6.4-3.1 1.2-4.4a.75.75 0 0 0-.9-1.1A10.5 10.5 0 1 0 21.6 15.5a.75.75 0 0 0-1.1-.9Z"></path></svg>
+        </button>
+      </div>
+    </nav>
   </header>
 
-  <section class="hero">
-    <div class="avatar" title="Hover me">
-      <img class="front" src="https://api.dicebear.com/7.x/shapes/svg?seed=nikita" alt="">
-      <img class="back" src="https://api.dicebear.com/7.x/personas/svg?seed=nikita" alt="">
-    </div>
-    <div>
-      <div class="name-row">
-        <h1>Nikita Bulava</h1>
-        <span class="badge"><svg viewBox="0 0 24 24" fill="#fff"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg></span>
-      </div>
-      <div class="socials">
-        <a href="#" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.3-3.2-.1-.3-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.9 11.9 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.7 1.7.2 2.9.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.7 5.6-5.4 5.9.4.4.8 1.1.8 2.3v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.35-.02-3.1-1.9-3.1-1.9 0-2.2 1.48-2.2 3v5.7h-4z"/></svg></a>
-        <a href="mailto:example@mail.com" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
-      </div>
-      <div class="role">Data Scientist <span>— analytics & machine learning</span></div>
-      <p class="bio">
-        I turn raw data into decisions using <span class="tag-inline">Python</span>
-        <span class="tag-inline">SQL</span> and
-        <span class="tag-inline">scikit-learn</span>, and build dashboards with
-        <span class="tag-inline">Power BI</span>. Studied Information Systems in
-        Management, with an exchange semester at the University of Arizona.
-      </p>
-      <a href="#" class="resume-btn">View resume <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg></a>
-    </div>
-  </section>
+  <main class="mx-auto flex w-full max-w-3xl flex-col gap-14 sm:gap-16 px-4 sm:px-6 pb-10 sm:pb-16">
 
-  <section id="projects">
-    <div class="section-title">Projects</div>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-thumb">project preview</div>
-        <div class="project-body">
-          <h3>Project name</h3>
-          <div class="project-role">Data Analyst</div>
-          <p class="project-desc">Short description of the dataset, the question, and the result.</p>
-          <div class="project-stack">
-            <div class="stack-icon">Py</div>
-            <div class="stack-icon">SQL</div>
+    <!-- HERO -->
+    <section class="flex flex-col justify-center pt-6 pb-8 sm:pt-16 sm:pb-8">
+      <div class="space-y-6 sm:space-y-10">
+        <div class="flex items-center mb-4 gap-4 sm:gap-6">
+          <div class="avatar h-32 w-32 shrink-0 rounded-full border-2 border-gray-200 bg-white shadow-sm sm:h-40 sm:w-40 dark:border-gray-500 dark:bg-ink cursor-pointer" title="Hover me">
+            <img class="front h-full w-full object-cover object-center rounded-full" src="images/main pfp.jpg" alt="Nikita Bulava">
+            <img class="back h-full w-full object-cover object-center rounded-full" src="images/switch.jpg" alt="Nikita Bulava">
+          </div>
+          <div>
+            <h1 class="flex items-center gap-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-2xl md:text-3xl">
+              Nikita Bulava
+              <svg viewBox="0 0 22 22" class="w-6 h-6 shrink-0 inline-block align-middle" title="Verified" aria-label="Verified"><path fill="#1D9BF0" d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.053-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.607-.274 1.264-.144 1.898.13.634.435 1.219.88 1.688.47.443 1.054.749 1.688.879.633.13 1.29.083 1.897-.14.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.607.224 1.264.272 1.897.14.634-.13 1.217-.436 1.687-.878.445-.47.75-1.055.88-1.688.13-.634.083-1.291-.14-1.897.586-.274 1.084-.705 1.438-1.246.354-.541.551-1.17.57-1.817Zm-11.343 3.9-3.5-3.5 1.238-1.238 2.262 2.262 5.315-5.315L15.5 8.35l-6.5 6.55Z"></path></svg>
+            </h1>
+            <div class="flex items-start gap-3 mt-2">
+              <a href="https://github.com/sadqma" target="_blank" rel="noopener noreferrer" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5" title="GitHub"><i class="fab fa-github text-xl text-gray-700 dark:text-gray-300 transition-colors hover:text-[#181717] dark:hover:text-white"></i></a>
+              <a href="https://www.linkedin.com/in/nikita-bulava/" target="_blank" rel="noopener noreferrer" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5" title="LinkedIn"><i class="fab fa-linkedin text-xl text-gray-700 dark:text-gray-300 transition-colors hover:text-[#0A66C2]"></i></a>
+              <a href="mailto:nikitabulava@outlook.com" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5" title="Email"><i class="fas fa-envelope text-xl text-gray-700 dark:text-gray-300 transition-colors hover:text-[#EA4335]"></i></a>
+            </div>
           </div>
         </div>
-        <div class="project-footer">visit site <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
-      </div>
 
-      <div class="project-card">
-        <div class="project-thumb">project preview</div>
-        <div class="project-body">
-          <h3>Project name</h3>
-          <div class="project-role">Machine Learning</div>
-          <p class="project-desc">Short description of the dataset, the question, and the result.</p>
-          <div class="project-stack">
-            <div class="stack-icon">Py</div>
-            <div class="stack-icon">ML</div>
+        <div class="space-y-5 sm:space-y-6">
+          <h2 class="max-w-full text-[1.7rem] font-normal tracking-tight leading-tight text-gray-900 dark:text-white sm:text-[2.05rem] md:text-[2.15rem]">Data Scientist <span class="text-[0.95em] font-light text-gray-500 dark:text-gray-400">— analytics &amp; machine learning</span></h2>
+          <p class="text-base font-light leading-7 text-gray-500 dark:text-gray-400 sm:text-lg sm:leading-8">
+            I turn raw data into decisions using
+            <span class="inline align-middle"><span class="bg-white dark:bg-ink ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed border-gray-300 dark:border-gray-700 px-2 py-1 text-xs text-gray-800 dark:text-gray-200 sm:px-2.5 sm:text-sm"><i class="fab fa-python" style="color:#3776AB"></i>Python</span><span class="bg-white dark:bg-ink ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed border-gray-300 dark:border-gray-700 px-2 py-1 text-xs text-gray-800 dark:text-gray-200 sm:px-2.5 sm:text-sm"><i class="fab fa-git-alt" style="color:#F05032"></i>Git</span><span class="bg-white dark:bg-ink ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed border-gray-300 dark:border-gray-700 px-2 py-1 text-xs text-gray-800 dark:text-gray-200 sm:px-2.5 sm:text-sm"><i class="fas fa-bolt" style="color:#009688"></i>FastAPI</span></span>
+            and store it in
+            <span class="inline align-middle"><span class="bg-white dark:bg-ink ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed border-gray-300 dark:border-gray-700 px-2 py-1 text-xs text-gray-800 dark:text-gray-200 sm:px-2.5 sm:text-sm"><i class="fas fa-database" style="color:#336791"></i>PostgreSQL</span></span>.
+            Studied Information Systems in Management, with an exchange semester at the University of Arizona.
+          </p>
+          <div class="flex flex-wrap gap-3 sm:gap-4 pt-2">
+            <a href="resume.html" class="group inline-flex items-center gap-2 bg-ink px-6 py-3 text-base font-medium text-white rounded-lg hover:scale-[1.03] transition-transform dark:bg-white dark:text-black">
+              <span>View Resume</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            </a>
           </div>
         </div>
-        <div class="project-footer">visit site <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
       </div>
+    </section>
 
-      <div class="project-card">
-        <div class="project-thumb">project preview</div>
-        <div class="project-body">
-          <h3>Project name</h3>
-          <div class="project-role">BI Dashboard</div>
-          <p class="project-desc">Short description of the dataset, the question, and the result.</p>
-          <div class="project-stack">
-            <div class="stack-icon">SQL</div>
-            <div class="stack-icon">BI</div>
+    <!-- PROJECTS -->
+    <section class="w-full space-y-5" id="projects">
+      <p class="text-2xl sm:text-3xl font-light tracking-tight text-gray-900 dark:text-white">Projects</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+
+        <div class="card-spotlight flex h-full flex-col gap-2 bg-white dark:bg-ink border border-dashed border-gray-300 dark:border-gray-700 p-2 rounded-xl w-full">
+          <div class="block rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 h-40"><img src="images/PASS.jpg" alt="Pass project preview" class="h-full w-full object-cover object-top"></div>
+          <div class="flex flex-1 flex-col px-2 mt-3">
+            <div class="flex items-center gap-1.5"><span class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white leading-none">Pass</span></div>
+            <p class="mt-1 text-xs font-semibold text-gray-700 dark:text-gray-300">Machine Learning</p>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Predictive Academic Success System — FastAPI backend predicts a student's academic risk from grades and ratings, served through a live dashboard.</p>
+            <div class="mt-3"><div class="flex items-center gap-3">
+              <span title="Python" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fab fa-python text-base" style="color:#3776AB"></i></span>
+              <span title="FastAPI" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fas fa-server text-base text-gray-500 dark:text-gray-400"></i></span>
+              <span title="scikit-learn" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fas fa-diagram-project text-base text-gray-500 dark:text-gray-400"></i></span>
+              <span title="JavaScript" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fab fa-js text-base" style="color:#F0DB4F"></i></span>
+            </div></div>
+          </div>
+          <div class="mt-auto"><div class="w-full h-px bg-gray-200 dark:bg-gray-700 mt-1.5 mb-1"></div>
+            <div class="flex min-h-[34px] items-center justify-end gap-2 sm:gap-3 px-2 pb-1"><a href="https://github.com/sadqma/PASS_Project" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 text-[11px] font-mono uppercase tracking-widest text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"><span>View on GitHub</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
           </div>
         </div>
-        <div class="project-footer">read case study <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
-      </div>
 
-      <div class="project-card">
-        <div class="project-thumb">project preview</div>
-        <div class="project-body">
-          <h3>Project name</h3>
-          <div class="project-role">Data Analyst</div>
-          <p class="project-desc">Short description of the dataset, the question, and the result.</p>
-          <div class="project-stack">
-            <div class="stack-icon">Py</div>
+        <div class="card-spotlight flex h-full flex-col gap-2 bg-white dark:bg-ink border border-dashed border-gray-300 dark:border-gray-700 p-2 rounded-xl w-full">
+          <div class="block rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 h-40"><img src="images/Remote.jpg" alt="Remote project preview" class="h-full w-full object-cover object-top"></div>
+          <div class="flex flex-1 flex-col px-2 mt-3">
+            <div class="flex items-center gap-1.5"><span class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white leading-none">Remote</span></div>
+            <p class="mt-1 text-xs font-semibold text-gray-700 dark:text-gray-300">Automation / Tooling</p>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Phone-controlled remote for my PC — a FastAPI server exposes shutdown, sleep, volume, and app-launch endpoints from a lightweight web UI.</p>
+            <div class="mt-3"><div class="flex items-center gap-3">
+              <span title="Python" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fab fa-python text-base" style="color:#3776AB"></i></span>
+              <span title="FastAPI" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fas fa-server text-base text-gray-500 dark:text-gray-400"></i></span>
+              <span title="HTML/JS" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fab fa-html5 text-base" style="color:#E34F26"></i></span>
+            </div></div>
+          </div>
+          <div class="mt-auto"><div class="w-full h-px bg-gray-200 dark:bg-gray-700 mt-1.5 mb-1"></div>
+            <div class="flex min-h-[34px] items-center justify-end gap-2 sm:gap-3 px-2 pb-1"><a href="https://github.com/sadqma/remote" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 text-[11px] font-mono uppercase tracking-widest text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"><span>View on GitHub</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
           </div>
         </div>
-        <div class="project-footer">visit site <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M8 7h9v9"/></svg></div>
-      </div>
 
-    </div>
-    <div class="more-btn-wrap"><a href="#" class="more-btn">Show all projects <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg></a></div>
-  </section>
+        <div class="card-spotlight flex h-full flex-col gap-2 bg-white dark:bg-ink border border-dashed border-gray-300 dark:border-gray-700 p-2 rounded-xl w-full">
+          <div class="block rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 h-40"><img src="images/Detection_Spam_Messages.jpg" alt="Detection Spam Messages project preview" class="h-full w-full object-cover"></div>
+          <div class="flex flex-1 flex-col px-2 mt-3">
+            <div class="flex items-center gap-1.5"><span class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white leading-none">Detection Spam Messages</span></div>
+            <p class="mt-1 text-xs font-semibold text-gray-700 dark:text-gray-300">Machine Learning</p>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Diploma project detecting SMS spam with Logistic Regression and Naive Bayes, streamed through Kafka with a Node.js API and a live model-comparison dashboard.</p>
+            <div class="mt-3"><div class="flex items-center gap-3">
+              <span title="Python" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fab fa-python text-base" style="color:#3776AB"></i></span>
+              <span title="scikit-learn" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fas fa-diagram-project text-base text-gray-500 dark:text-gray-400"></i></span>
+              <span title="Node.js" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fab fa-node-js text-base" style="color:#3C873A"></i></span>
+              <span title="Docker" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-0.5"><i class="fab fa-docker text-base" style="color:#2496ED"></i></span>
+            </div></div>
+          </div>
+          <div class="mt-auto"><div class="w-full h-px bg-gray-200 dark:bg-gray-700 mt-1.5 mb-1"></div>
+            <div class="flex min-h-[34px] items-center justify-end gap-2 sm:gap-3 px-2 pb-1"><a href="https://github.com/sadqma/Detection-Spam-Messages" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 text-[11px] font-mono uppercase tracking-widest text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"><span>View on GitHub</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div>
+          </div>
+        </div>
 
-  <div class="marquee">
-    <div class="marquee-track" id="marqueeTrack"></div>
-  </div>
+      </div>
+      <div class="text-center"><a class="group inline-flex items-center gap-1.5 bg-ink text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:scale-[1.03] transition-transform dark:bg-white dark:text-black" href="https://github.com/sadqma?tab=repositories" target="_blank" rel="noopener noreferrer"><span>Show All Projects</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a></div>
+    </section>
 
-  <section id="education">
-    <div class="section-title">Education</div>
-    <div class="edu-item">
-      <div class="edu-date">Until 2022</div>
-      <div>
-        <h3>BEST Gymnasium</h3>
-        <p>Petropavlovsk, Kazakhstan</p>
+    <!-- TECHNOLOGIES -->
+    <section class="w-full space-y-5">
+      <p class="text-2xl sm:text-3xl font-light tracking-tight text-gray-900 dark:text-white">Technologies</p>
+      <div class="marquee">
+        <div class="marquee-track" id="marqueeTrack"></div>
       </div>
-    </div>
-    <div class="edu-item">
-      <div class="edu-date">Year 4, exchange</div>
-      <div>
-        <h3>University of Arizona</h3>
-        <p>One semester in the US as part of an exchange program</p>
-      </div>
-    </div>
-    <div class="edu-item">
-      <div class="edu-date">Bachelor's degree</div>
-      <div>
-        <h3>NKU named after M. Kozybayev</h3>
-        <p>Information Systems in Management</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="outside">
-    <div class="section-title">Outside the IDE</div>
-    <div class="outside">
-      <div class="outside-text">
-        <p>I'm a big fan of sports, gaming, and music. I'm also a big fan of watching movies.</p>
-        <div class="hobby-tags">
-          <span>Sports</span>
-          <span>Gaming</span>
-          <span>Movies</span>
-          <span>Music</span>
+    <!-- EDUCATION -->
+    <section class="w-full space-y-6" id="education">
+      <p class="text-2xl sm:text-3xl font-light tracking-tight text-gray-900 dark:text-white">Education</p>
+      <div class="space-y-7 sm:space-y-8">
+        <div class="sm:grid sm:grid-cols-[150px_1fr] sm:gap-6">
+          <p class="text-xs font-medium text-gray-400 dark:text-gray-500 whitespace-nowrap mb-1 sm:mb-0">Until 2022</p>
+          <div><h3 class="font-semibold text-gray-900 dark:text-white text-base">BEST Gymnasium</h3><p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Petropavlovsk, Kazakhstan</p></div>
+        </div>
+        <div class="sm:grid sm:grid-cols-[150px_1fr] sm:gap-6">
+          <p class="text-xs font-medium text-gray-400 dark:text-gray-500 whitespace-nowrap mb-1 sm:mb-0">Year 4, exchange</p>
+          <div><h3 class="font-semibold text-gray-900 dark:text-white text-base">University of Arizona</h3><p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">One semester in the US as part of an exchange program</p></div>
+        </div>
+        <div class="sm:grid sm:grid-cols-[150px_1fr] sm:gap-6">
+          <p class="text-xs font-medium text-gray-400 dark:text-gray-500 whitespace-nowrap mb-1 sm:mb-0">Bachelor's degree</p>
+          <div><h3 class="font-semibold text-gray-900 dark:text-white text-base">NKU named after M. Kozybayev</h3><p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Information Systems in Management</p></div>
         </div>
       </div>
-      <div class="gallery" id="gallery">
-        <div class="gallery-card active" style="background:linear-gradient(135deg,#2a3a55,#141420)">Sports</div>
-        <div class="gallery-card" style="background:linear-gradient(135deg,#2a5540,#141420)">Gaming</div>
-        <div class="gallery-card" style="background:linear-gradient(135deg,#553a2a,#141420)">Music</div>
-        <div class="gallery-card" style="background:linear-gradient(135deg,#553a2a,#141420)">Movies</div>
+    </section>
+
+    <!-- OUTSIDE THE IDE -->
+    <section class="w-full space-y-5">
+      <p class="text-2xl sm:text-3xl font-light tracking-tight text-gray-900 dark:text-white">Outside the IDE</p>
+      <div class="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div class="space-y-4">
+          <p class="text-gray-500 dark:text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl">I'm a big fan of sports, gaming, and music. I'm also a big fan of watching movies.</p>
+          <div class="flex flex-wrap gap-2.5">
+            <span class="inline-flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-ink px-3 py-1 text-xs font-medium text-gray-700 dark:text-gray-200">Sports</span>
+            <span class="inline-flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-ink px-3 py-1 text-xs font-medium text-gray-700 dark:text-gray-200">Gaming</span>
+            <span class="inline-flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-ink px-3 py-1 text-xs font-medium text-gray-700 dark:text-gray-200">Movies</span>
+            <span class="inline-flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-ink px-3 py-1 text-xs font-medium text-gray-700 dark:text-gray-200">Music</span>
+          </div>
+        </div>
+        <div class="flex justify-center lg:justify-end">
+          <div class="gallery" id="gallery" style="width:224px;height:224px">
+            <div class="gallery-card" style="background:linear-gradient(135deg,#2a3a55,#141420)">Sports</div>
+            <div class="gallery-card" style="background:linear-gradient(135deg,#2a5540,#141420)">Gaming</div>
+            <div class="gallery-card" style="background:linear-gradient(135deg,#553a2a,#141420)">Music</div>
+            <div class="gallery-card" style="background:linear-gradient(135deg,#553a2a,#141420)">Movies</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GITHUB ACTIVITY -->
+    <div class="w-full space-y-4">
+      <p class="text-2xl sm:text-3xl font-light tracking-tight text-gray-900 dark:text-white">GitHub Activity</p>
+      <div class="rounded-2xl border border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-ink p-4 sm:p-6 overflow-x-auto">
+        <div class="inline-flex flex-col gap-1 min-w-150">
+          <div class="flex gap-0.75 pl-0 text-[10px] text-gray-400 dark:text-gray-500" id="ghMonths"></div>
+          <div class="flex gap-0.75" id="ghGrid"></div>
+        </div>
+        <p class="mt-4 text-sm text-gray-400 dark:text-gray-500" id="ghCount">Loading...</p>
       </div>
     </div>
-  </section>
 
-  <section id="github">
-    <div class="section-title">GitHub Activity</div>
-    <div class="gh-card">
-      <div class="gh-months" id="ghMonths"></div>
-      <div class="gh-grid" id="ghGrid"></div>
-      <div class="gh-count" id="ghCount">Loading...</div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="section-title">Let's work together.</div>
-    <div class="contact-flex">
-      <p class="contact-lead">Open to data analysis, dashboards, and machine learning projects — Python, SQL, and BI tooling.</p>
-      <div class="contact-cards">
-        <a class="contact-card" href="mailto:nikitabulava@outlook.com">
-          <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
-          <div><div class="label">Email</div><div class="value">nikitabulava@outlook.com</div></div>
-          <div class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg></div>
-        </a>
+    <!-- CONTACT -->
+    <section class="w-full space-y-5" id="contact">
+      <p class="text-2xl sm:text-3xl font-light tracking-tight text-gray-900 dark:text-white">Let's work together.</p>
+      <div class="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div class="space-y-4">
+          <p class="text-gray-500 dark:text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl">Open to data analysis, dashboards, and machine learning projects — Python, SQL, and BI tooling.</p>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          <a href="mailto:nikitabulava@outlook.com" class="group flex items-center justify-between gap-4 rounded-2xl border border-gray-200/80 bg-white/90 px-4 py-4 shadow-sm shadow-gray-900/5 transition-all hover:-translate-y-1 hover:border-gray-300 hover:bg-white hover:shadow-md dark:border-slate-700/80 dark:bg-slate-900/80 dark:shadow-black/20 dark:hover:border-blue-700/70 dark:hover:bg-slate-800/90">
+            <div class="flex min-w-0 items-center gap-3">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-ink transition-colors group-hover:bg-gray-200 dark:bg-slate-800 dark:text-blue-100 dark:group-hover:bg-blue-950/70">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+              </div>
+              <div class="min-w-0"><span class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 transition-colors dark:text-blue-300/80 dark:group-hover:text-blue-200">Email</span><p class="truncate text-sm font-normal text-gray-900 dark:text-white">nikitabulava@outlook.com</p></div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-gray-300 transition-all group-hover:translate-x-1 group-hover:text-gray-700 dark:text-slate-500 dark:group-hover:text-blue-200" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </a>
+          <a href="https://github.com/sadqma" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between gap-4 rounded-2xl border border-gray-200/80 bg-white/90 px-4 py-4 shadow-sm shadow-gray-900/5 transition-all hover:-translate-y-1 hover:border-gray-300 hover:bg-white hover:shadow-md dark:border-slate-700/80 dark:bg-slate-900/80 dark:shadow-black/20 dark:hover:border-blue-700/70 dark:hover:bg-slate-800/90">
+            <div class="flex min-w-0 items-center gap-3">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-ink transition-colors group-hover:bg-gray-200 dark:bg-slate-800 dark:text-blue-100 dark:group-hover:bg-blue-950/70">
+                <i class="fab fa-github h-4 w-4"></i>
+              </div>
+              <div class="min-w-0"><span class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 transition-colors dark:text-blue-300/80 dark:group-hover:text-blue-200">GitHub</span><p class="truncate text-sm font-normal text-gray-900 dark:text-white">github.com/sadqma</p></div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0 text-gray-300 transition-all group-hover:translate-x-1 group-hover:text-gray-700 dark:text-slate-500 dark:group-hover:text-blue-200" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <span>© 2026 Nikita Bulava</span>
-    <span id="visitCount">Visits: —</span>
-  </footer>
+    <footer class="border-t border-dashed border-gray-300 pt-6 text-sm dark:border-gray-700 sm:pt-8">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+        <div class="max-w-xl text-center sm:text-left">
+          <p class="text-sm italic text-gray-400 dark:text-gray-500">Turning data into decisions.</p>
+          <p class="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-gray-500 dark:text-gray-400 sm:justify-start">
+            <span class="font-normal tracking-tight text-gray-900 dark:text-white">Nikita Bulava</span><span class="text-gray-300 dark:text-gray-600">/</span><span>Data Scientist</span><span class="text-gray-300 dark:text-gray-600">/</span><span>Petropavlovsk, Kazakhstan</span>
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-3 sm:justify-end">
+          <p class="rounded-full border border-dashed border-gray-300 px-3 py-1 text-xs font-medium text-gray-500 dark:border-gray-700 dark:text-gray-400" id="visitCount">Visits: —</p>
+        </div>
+      </div>
+    </footer>
 
+  </main>
 </div>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
